@@ -17,9 +17,25 @@ const reducer = (state, action) => {
         todoList : [...state.todoList, newTodo]
       };
     case ACTION_TYPES.del : 
-      return state;
+      return {
+        count : state.count - 1,
+        todoList : state.todoList.filter( todos =>
+          todos.id !== action.payload.id
+        )
+      };
     case ACTION_TYPES.completed : 
-      return state;  
+      return {
+        count : state.count ,
+        todoList : state.todoList.map( todos =>{
+          if(todos.id === action.payload.id){
+            console.log(todos.completed)
+            return {...todos, completed : !todos.completed}
+          }
+          return todos;
+        })
+      };  
+    default:
+      return state;
   }
 }
 
@@ -55,7 +71,9 @@ function App_reducer_complex() {
           <Todo 
           key = {todos.id}
           todo = {todos.todo}
-          dispatch = {dispatch} />
+          dispatch = {dispatch} 
+          id = {todos.id}
+          completed = {todos.completed} />
         )
       })}
     </div>
