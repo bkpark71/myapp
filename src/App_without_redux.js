@@ -3,58 +3,69 @@ import './App.css';
 import Button from './Button_without_redux';
 function App_without_redux() {
   return (
+    <Parent />
+  )
+}
+
+function Parent(props) {
+  const [color, setColor] = useState("white");
+  const style = {
+    backgroundColor : color
+  }
+  console.log("parent : " , props.setColor, props.style);
+  return (
     <div>
-      <RedContainer />
-      <GreenContainer />
-      <BlueContainer />
-      <PurpleContainer />
+      <RedContainer setColor={setColor} style={style}/>
+      <GreenContainer setColor={setColor} style={style}/>
+      <BlueContainer setColor={setColor} style={style}/>
+      <PurpleContainer setColor={setColor} style={style}/>
     </div> 
   )
 }
 
-function RedContainer(){
-  const [color, setColor] = useState("white");
+function RedContainer(props){
+  console.log("RedContainer : " ,props);
   const onClick = () => {
-    setColor("red");
+    props.setColor("red");
   }
   return (
-    <div className="container" style= {{backgroundColor : color}}>
+    <div className="container" style= {props.style}>
       <Button text = "red" onClick={onClick} />
     </div>
   );
 }
 
-function GreenContainer(){
-  const [color, setColor] = useState("white");
+function GreenContainer(props){
+  console.log("greenContainer : " ,props);
   const onClick = () => {
-    setColor("green");
+    props.setColor("green");
   }
   return (
-    <div className="container" style= {{backgroundColor : color}}>
+    <div className="container" style= {props.style}>
       <Button text = "green" onClick={onClick} />
     </div>
   );
 }
 
-function BlueContainer(){
-  const [color, setColor] = useState("white");
+function BlueContainer(props){
+  console.log("blueContainer : " ,props);
   const onClick = () => {
-    setColor("blue");
+    props.setColor("blue");
   }
   return (
-    <div className="container" style= {{backgroundColor : color}}>
+    <div className="container" style= {props.style}>
       <Button text = "blue" onClick={onClick} />
     </div>
   );
 }
 
-function PurpleContainer(){
-  const [color, setColor] = useState("white");
+function PurpleContainer(props){
+  console.log("purpleContainer : " ,props);
   const onClick = () => {
-    setColor("purple");
+    props.setColor("purple");
   }
   return (
-    <div className="container" style= {{backgroundColor : color}}>
+    <div className="container" style= {props.style}>
       <Button text = "purple" onClick={onClick} />
     </div>
   );
